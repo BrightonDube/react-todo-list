@@ -1,19 +1,9 @@
 import { useState } from 'react'
 import './styles.css'
 export default function App(){
-  const [newItem, setNewItem] = useState("")
+  
   const [todos, setTodos] = useState([])
-  function handleSubmit(e) {
-    e.preventDefault()
-    setTodos(currentTodos => {
-      return[
-        ...currentTodos, {
-          id: crypto.randomUUID(), title: newItem, completed: false
-        },
-      ]
-    })
-    setNewItem("")
-  }
+  
   function toggleTodo(id, completed) {
     setTodos(currentTodos => {
       return currentTodos.map(todo => {
@@ -44,6 +34,7 @@ export default function App(){
   </form>
   <h1 className='header'>Todo List</h1>
   <ul className="list">
+    {todos.length === 0 && "No Todos"}
     {todos.map(todo => {
       return <li key={todo.id}>
       <label>
