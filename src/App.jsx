@@ -5,14 +5,14 @@ export default function App(){
   const [todos, setTodos] = useState([])
   function handleSubmit() {
     e.preventDefault()
-    setTodos(currentTodos){
+    setTodos((currentTodos) => {
       return[
         ...currentTodos, {
           id: crypto.randomUUID(), title: newItem, completed: false
         },
       ]
     }
-  }
+  )}
   return <>
   <form onSubmit={handleSubmit} action="post" className='new-item-form'>
     <div className="form-row">
@@ -28,13 +28,17 @@ export default function App(){
   </form>
   <h1 className='header'>Todo List</h1>
   <ul className="list">
-    <li>
-      <label htmlFor="item">
-        <input type="checkbox" />
-        Item 1
+    {todos.map(todo => {
+      return 
+      <li>
+      <label>
+        <input type="checkbox" checked={todo.completed} />
+        {todo.title}
       </label>
       <button className="btn btn-danger">Delete</button>
     </li>
+    })}
+    
   </ul>
   </>
 }
